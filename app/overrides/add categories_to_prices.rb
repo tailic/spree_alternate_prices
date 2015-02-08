@@ -30,6 +30,7 @@ Deface::Override.new(virtual_path: virtual_path,
 	          <%= text_field_tag(tag_name, (price && price.price ? price.display_amount.money : '')) %>
 	        </div>
 	      <% end %>
+<br><br>
 	    </div>
 	  <% end %>
 	},
