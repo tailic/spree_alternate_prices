@@ -1,0 +1,8 @@
+de:
+  spree:
+    alternate_price_calculator: Alternative Preise
+    price_categories: Preiskategorien
+    listing_price_categories: Preiskategorien
+    new_category: Neue Kategorie
+    category_name: Kategorie Name
+    back_to_categories_list: zurück zur Kategorie-Liste
