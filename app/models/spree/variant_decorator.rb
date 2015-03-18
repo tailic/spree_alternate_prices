@@ -14,7 +14,7 @@ Spree::Variant.class_eval do
 			unscope(where: :category_id)
 		end
 		def with_category(category)
-			rewhere(category_id: category.id)
+      unscope(where: :category_id).where(category_id: category.id)
 		end
 	end
 
