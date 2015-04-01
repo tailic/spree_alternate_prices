@@ -20,7 +20,7 @@ Deface::Override.new(virtual_path: virtual_path,
 	  <% categories = Spree::PriceCategory.all %>
 	  <% categories.each do |category| %>
 	    <div class="omega four columns">
-				<h5>&nbsp;</h5>
+				<h5 class="twelve columns">&nbsp;</h5>
 	      <h6><%= category.name.titleize %></h6>
 	      <% supported_currencies.each do |currency| %>
 	        <% price = variant.price_in(currency.iso_code, category) %>
@@ -30,8 +30,10 @@ Deface::Override.new(virtual_path: virtual_path,
 	          <%= text_field_tag(tag_name, (price && price.price ? price.display_amount.money : '')) %>
 	        </div>
 	      <% end %>
+<br><br>
 	    </div>
 	  <% end %>
+
 	},
 	original: '869cab3c38208e1276b94e81b604467e14fb5284'
 )
