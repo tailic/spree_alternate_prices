@@ -8,6 +8,13 @@ Deface::Override.new(virtual_path: virtual_path_index,
                      text: %q{
                      	<div id="batchprices" class="row" style="background:#eee;">
 <h5>Preise für alle Varianten ändern</h5>
+<div class="omega twelve columns">
+<div class="field">
+		<%= label_tag 'Varianten Typ' %>
+    <%= select_tag "type", options_for_select({ "keine Muster" => "no-sample", "Muster" => "sample"}, "no-sample") %>
+		<small>Die im Folgenden eingetragenen Preise werden nur auf diesen Varianten-Typ übertragen.</small>
+</div>
+</div>
 	  <% categories = Spree::PriceCategory.all %>
 	    <div class="omega four columns">
 				<h5 class="twelve columns" style="margin:0;">&nbsp;</h5>
@@ -37,21 +44,19 @@ Deface::Override.new(virtual_path: virtual_path_index,
  <h5 class="twelve columns" style="margin:0;">&nbsp;</h5>
   <h6>&nbsp;</h6>
   <div class="field">
-    <a class="button" id="batch-confirm">Übernehmen</a>
+    <a class="button" id="batch-confirm" href="#">Übernehmen</a>
   </div>
 </div>
-<div class="omega four columns">
- <h5 class="twelve columns" style="margin:0;">&nbsp;</h5>
-  <h6>&nbsp;</h6>
+<div class="omega twelve columns">
   <div class="field">
-    <small>Die Preise werden 1:1 auf alle Varianten übernommen (auch leere Felder). Speichern nicht vergessen!</small>
+    <small>Die Preise werden 1:1 auf alle Varianten übernommen (auch leere Felder). Die Änderungen müssen im Anschluss gespeichert werden!</small>
   </div>
 </div>
 <script>
   $('#batch-confirm').click(function(){
     $('#batchprices .batchprice').each(function() {
       var $this = $(this);
-      var selector = $this.data('selector');
+      var selector = '[data-type="' + $("#type").val() + '"] ' + $this.data('selector');
       $(selector).val($this.val());
     });
   });
@@ -80,7 +85,7 @@ Deface::Override.new(virtual_path: virtual_path,
 	<div class="row">
 	  <% categories = Spree::PriceCategory.all %>
 	  <% categories.each do |category| %>
-	    <div class="omega four columns">
+	    <div class="omega four columns" data-type="<%= variant.is_sample? ? 'sample' : 'no-sample' %>">
 				<h5 class="twelve columns" style="margin:0;">&nbsp;</h5>
 	      <h6><%= category.name.titleize %></h6>
 	      <% supported_currencies.each do |currency| %>
